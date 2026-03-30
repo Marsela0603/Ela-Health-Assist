@@ -1,0 +1,151 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "Kamu asisten pelatihan NF Academy, yang siap menjawab pertanyaan dengan baik\nsesuai dengan bahasa yang digunakan penanya.\nJawablah pertanyaan tentang produk, deskripsi/uraian, biaya/harga, dan\ntempat/lokasi pelatihan sesuai dengan informasi yang tersedia dalam Tool Get\nrow(s) in sheet in Google Sheets\nJika kamu tidak menemukan informasi produk, harga, dan tempat pelatihan, jangan\nmengarang jawaban. Berikan jawaban, \"Maaf, saya belum memiliki data yang Anda\nminta. Silakan lihat web nfacademy.id\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "5449102d-b014-48e1-9342-2ebba2d931b0",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-safeguard-20b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        160,
+        192
+      ],
+      "id": "b6515289-f660-4e9a-b119-dce5019a0628",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "QY0S0IDIlsZDbOqd",
+          "name": "Groq account 2"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        192
+      ],
+      "id": "8ba3bf39-a177-464a-80d0-144543380a9c",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1Lo9Mw9jwoZ1R5yoKZCL_7hHc3AcVzchwmoSObEmfku4",
+          "mode": "list",
+          "cachedResultName": "n8n 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Lo9Mw9jwoZ1R5yoKZCL_7hHc3AcVzchwmoSObEmfku4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Lo9Mw9jwoZ1R5yoKZCL_7hHc3AcVzchwmoSObEmfku4/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        448,
+        192
+      ],
+      "id": "1c313479-af06-4c52-8b3c-f1abb92d0809",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "z944TsX05icV9STH",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hi there! 👋\nMy name is Ela. How can I assist you today?",
+        "options": {
+          "customCss": ":root {\n  /* 🌸 Pastel Colors */\n  --chat--color--primary: #f8a5c2;           /* pastel pink */\n  --chat--color--primary-shade-50: #f39ab9;\n  --chat--color--primary--shade-100: #ec8fb0;\n\n  --chat--color--secondary: #7ed6c1;         /* pastel mint */\n  --chat--color-secondary-shade-50: #6bcbb4;\n\n  --chat--color-white: #ffffff;\n  --chat--color-light: #fdf6f9;              /* soft background */\n  --chat--color-light-shade-50: #f6e9ef;\n  --chat--color-light-shade-100: #e9dbe3;\n\n  --chat--color-medium: #e6dfe5;\n  --chat--color-dark: #5a5a6e;\n  --chat--color-disabled: #e0d8df;\n  --chat--color-typing: #7a7a8c;\n\n  /* Layout */\n  --chat--spacing: 1rem;\n  --chat--border-radius: 1rem;\n  --chat--transition-duration: 0.2s;\n  --chat--font-family: 'Segoe UI', sans-serif;\n\n  /* Window */\n  --chat--window--width: 380px;\n  --chat--window--height: 580px;\n  --chat--window--border-radius: 1.2rem;\n  --chat--window--border: none;\n  --chat--window--z-index: 9999;\n\n  /* Header */\n  --chat--header--background: linear-gradient(135deg,#f8a5c2,#c7ceea);\n  --chat--header--color: white;\n  --chat--header--padding: 1.2rem;\n\n  --chat--heading--font-size: 1.3rem;\n\n  /* Message */\n  --chat--message--font-size: 0.95rem;\n  --chat--message--padding: 0.8rem 1rem;\n  --chat--message--border-radius: 1rem;\n  --chat--message--margin-bottom: 0.7rem;\n\n  --chat--message--bot--background: #ffffff;\n  --chat--message--bot--color: #5a5a6e;\n\n  --chat--message--user--background: #7ed6c1;\n  --chat--message--user--color: white;\n\n  --chat--message--pre--background: #f4f4f8;\n\n  /* Toggle button */\n  --chat--toggle--size: 60px;\n  --chat--toggle--background: linear-gradient(135deg,#f8a5c2,#c7ceea);\n  --chat--toggle--hover--background: #f39ab9;\n  --chat--toggle--active--background: #ec8fb0;\n  --chat--toggle--color: white;\n\n  /* Input */\n  --chat--textarea--height: 48px;\n  --chat--input--background: white;\n  --chat--input--border-radius: 1rem;\n  --chat--input--padding: 0.7rem;\n  --chat--input--text-color: #5a5a6e;\n\n  /* Button */\n  --chat--button--border-radius: 0.8rem;\n\n  --chat--button--background--primary: #7ed6c1;\n  --chat--button--background--primary--hover: #6bcbb4;\n\n  --chat--button--background--secondary: #c7ceea;\n  --chat--button--background--secondary--hover: #b5bde0;\n\n  /* Send icon */\n  --chat--input--send--button--color: #7ed6c1;\n  --chat--input--send--button--color-hover: #f8a5c2;\n\n  /* Background */\n  --chat--body--background: #fdf6f9;\n  --chat--footer--background: #fdf6f9;\n}\n\n/* Bubble style lebih aesthetic */\n.chat-message {\n  max-width: 70%;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.05);\n}\n\n/* smooth animation */\n.chat-window {\n  backdrop-filter: blur(6px);\n}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c494cf71-9622-4510-9ba7-d2a763a5b3d6",
+      "name": "When chat message received",
+      "webhookId": "4f554f94-01a9-4863-b259-a630a675bba7"
+    }
+  ],
+  "connections": {
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "ce990bcc585932175f54be02db3dd4b02728b62747f171014c2d232b3c183093"
+  }
+}
